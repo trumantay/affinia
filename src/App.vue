@@ -1,9 +1,9 @@
 <script setup>
 
+import { reactive, computed } from "vue"
+
 /* CONFIGURATION */
 import { MATCHING_PROFILES } from "./applications/matchingProfiles"
-
-import { USER_WEIGHTS } from "./config/userWeights"
 
 import { ACTIVE_FILTERS } from "./config/filters"
 
@@ -20,19 +20,36 @@ const me = sampleProfiles[0]
 
 const currentPurpose = "study"
 
-const finalWeights =
+const userWeights = reactive({
+
+    location: 1,
+
+    interests: 1,
+
+    personality: 1,
+
+    goals: 1
+})
+
+const finalWeights = computed(() =>
+
     generateWeights(
         MATCHING_PROFILES[currentPurpose],
-        USER_WEIGHTS
+        userWeights
     )
 
-const matches =
+)
+
+const matches = computed(() =>
+
     findMatches(
         me,
         sampleProfiles,
-        finalWeights,
+        finalWeights.value,
         ACTIVE_FILTERS
     )
+
+)
 
 console.log(matches)
 
@@ -43,10 +60,25 @@ console.log(matches)
     <div>
 
         <h1>Affinia</h1>
-          <p>
-            Purpose:
-            {{ currentPurpose }}
-          </p>
+          <p> Purpose: {{ currentPurpose }} </p>
+
+          <h3> Your Priorities </h3>
+
+          <p> Location: {{ userWeights.location }} </p>
+          <input type="range" min="0" max="5" v-model="userWeights.location"/>
+
+          <p> Interests: {{ userWeights.interests }} </p>
+          <input type="range" min="0" max="5" v-model="userWeights.interests"/>
+
+          <p> Personality: {{ userWeights.personality }} </p>
+          <input type="range" min="0" max="5" v-model="userWeights.personality"/>
+
+          <p> Goals: {{ userWeights.goals }} </p>
+          <input type="range" min="0" max="5" v-model="userWeights.goals"/>
+          
+          <pre>
+            {{ userWeights }}
+          </pre>
           <pre>
             {{ finalWeights }}
           </pre>
