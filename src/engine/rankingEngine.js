@@ -7,7 +7,8 @@ import { explainMatch } from "./explainabilityEngine"
 export function rankProfiles(
     targetProfile,
     profiles,
-    weights
+    weights,
+    filters
 ) {
 
     const rankings = profiles
@@ -44,6 +45,13 @@ export function rankProfiles(
                     )
             }
         })
+
+        .filter(match =>
+
+            match.compatibility >=
+            filters.minimumCompatibility
+
+        )
 
         .sort(
             (a, b) =>

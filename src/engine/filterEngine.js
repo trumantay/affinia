@@ -13,14 +13,14 @@ export function filterProfiles(
         }
 
         if (
-            filters.location &&
+            filters.sameLocation &&
             profile.location.area !==
                 targetProfile.location.area
         ) {
             return false
         }
 
-        if (filters.interests) {
+        if (filters.sharedInterests) {
 
             const shared =
                 profile.interests.filter(
@@ -35,7 +35,7 @@ export function filterProfiles(
             }
         }
 
-        if (filters.goals) {
+        if (filters.sharedGoals) {
 
             const shared =
                 profile.goals.filter(

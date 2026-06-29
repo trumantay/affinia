@@ -21,6 +21,7 @@ export function findMatches(
     return rankProfiles(
         targetProfile,
         filteredProfiles,
-        weights
+        weights,
+        filters
     )
 }

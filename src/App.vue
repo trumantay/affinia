@@ -34,6 +34,17 @@ const userWeights = reactive({
     goals: 1
 })
 
+const userFilters = reactive({
+
+    sameLocation: true,
+
+    sharedInterests: true,
+
+    sharedGoals: false,
+
+    minimumCompatibility: 0
+})
+
 const finalWeights = computed(() =>
 
     generateWeights(
@@ -46,11 +57,11 @@ const finalWeights = computed(() =>
 const matches = computed(() =>
 
     findMatches(
-        me.value,
-        sampleProfiles,
-        finalWeights.value,
-        ACTIVE_FILTERS
-    )
+    me.value,
+    sampleProfiles,
+    finalWeights.value,
+    userFilters
+  )
 
 )
 
@@ -99,6 +110,17 @@ console.log(matches.value)
         
         <pre> {{ userWeights }} </pre>
         <pre> {{ finalWeights }} </pre>
+
+        <h3> Match Constraints </h3>
+
+        <p> <input type="checkbox" v-model="userFilters.sameLocation"/> Same location only </p>
+
+        <p> <input type="checkbox" v-model="userFilters.sharedInterests"/> Require shared interests </p>
+
+        <p> <input type="checkbox" v-model="userFilters.sharedGoals"/> Require shared goals </p>
+
+        <p> Minimum compatibility: {{ userFilters.minimumCompatibility }} </p>
+        <input type="range" min="0" max="100" v-model.number="userFilters.minimumCompatibility"/>
 
         <h2> Matches for {{ me.name }} </h2>
 
