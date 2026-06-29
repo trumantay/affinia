@@ -1,7 +1,7 @@
 // How important is each dimension?
 
 import {
-    locationSimilarity,
+    geographicSimilarity,
     interestSimilarity,
     goalSimilarity,
     personalitySimilarity
@@ -17,7 +17,7 @@ export function calculateCompatibility(
     const scores = {
 
         location:
-            locationSimilarity(personA, personB),
+            geographicSimilarity(personA, personB),
 
         interests:
             interestSimilarity(personA, personB),

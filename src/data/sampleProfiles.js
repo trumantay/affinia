@@ -10,7 +10,8 @@ export const sampleProfiles = [
 
         location: {
             area: "Clementi",
-            travelRadius: 5
+            latitude: 1.315,
+            longitude: 103.764
         },
 
         personality: {
@@ -44,7 +45,8 @@ export const sampleProfiles = [
 
         location: {
             area: "Clementi",
-            travelRadius: 3
+            latitude: 1.313,
+            longitude: 103.770
         },
 
         personality: {
@@ -76,8 +78,9 @@ export const sampleProfiles = [
         name: "John",
 
         location: {
-            area: "Jurong",
-            travelRadius: 10
+            area: "Bedok",
+            latitude: 1.324,
+            longitude: 103.930
         },
 
         personality: {

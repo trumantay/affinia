@@ -1,12 +1,31 @@
 // How similar are two humans?
 
-export function locationSimilarity(personA, personB) {
+import { calculateDistance } from "./distanceEngine"
 
-    if (personA.location.area === personB.location.area) {
+export function geographicSimilarity(
+    personA,
+    personB
+) {
+
+    const distance =
+        calculateDistance(
+            personA,
+            personB
+        )
+
+    if (distance <= 2)
         return 100
-    }
 
-    return 50
+    if (distance <= 5)
+        return 80
+
+    if (distance <= 10)
+        return 60
+
+    if (distance <= 20)
+        return 40
+
+    return 10
 }
 
 export function interestSimilarity(personA, personB) {
