@@ -51,8 +51,9 @@ export function calculateCompatibility(
 
     return {
 
-        overall: Math.round(overallScore),
+    compatibility:
+        Math.round(overallScore),
 
-        breakdown: scores
+    breakdown: scores
     }
 }

@@ -65,12 +65,24 @@ console.log(matches)
             </h3>
 
             <p>
-                Compatibility:
-                {{ match.compatibility }}%
+              Compatibility:
+              {{ match.compatibility }}%
             </p>
+            <h4>
+              Why?
+            </h4>
+            
+            <ul>
+                <li
+                    v-for="reason in match.explanation"
+                    :key="reason"
+                >
+                    {{ reason }}
+                </li>
+            </ul>
 
             <pre>
-{{ match.breakdown }}
+              {{ match.breakdown }}
             </pre>
 
         </div>

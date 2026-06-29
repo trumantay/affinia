@@ -1,7 +1,8 @@
 // Who are the best matches?
 
-import { calculateCompatibility }
-from "./scoringEngine"
+import { calculateCompatibility } from "./scoringEngine"
+
+import { explainMatch } from "./explainabilityEngine"
 
 export function rankProfiles(
     targetProfile,
@@ -30,10 +31,17 @@ export function rankProfiles(
                 profile,
 
                 compatibility:
-                    result.overall,
+                    result.compatibility,
 
                 breakdown:
-                    result.breakdown
+                    result.breakdown,
+
+                explanation:
+                    explainMatch(
+                        targetProfile,
+                        profile,
+                        result.breakdown
+                    )
             }
         })
 

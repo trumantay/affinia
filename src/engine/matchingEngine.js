@@ -1,10 +1,8 @@
 // combines everything together
 
-import { filterProfiles }
-from "./filterEngine"
+import { filterProfiles } from "./filterEngine"
 
-import { rankProfiles }
-from "./rankingEngine"
+import { rankProfiles } from "./rankingEngine"
 
 export function findMatches(
     targetProfile,
