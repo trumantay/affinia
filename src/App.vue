@@ -3,19 +3,21 @@
 import { sampleProfiles }
 from "./data/sampleProfiles"
 
-import { studyWeights }
-from "./applications/studyMatch"
+import { MATCHING_PROFILES }
+from "./applications/matchingProfiles"
 
 import { findMatches }
 from "./engine/matchingEngine"
 
 const me = sampleProfiles[0]
 
+const currentPurpose = "study"
+
 const matches =
     findMatches(
         me,
         sampleProfiles,
-        studyWeights
+        MATCHING_PROFILES[currentPurpose]
     )
 
 console.log(matches)
@@ -27,6 +29,10 @@ console.log(matches)
     <div>
 
         <h1>Affinia</h1>
+          <p>
+            Purpose:
+            {{ currentPurpose }}
+          </p>
 
         <h2>
             Matches for {{ me.name }}
