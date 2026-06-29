@@ -1,6 +1,6 @@
 <script setup>
 
-import { reactive, computed } from "vue"
+import { reactive, computed, ref } from "vue"
 
 /* CONFIGURATION */
 import { MATCHING_PROFILES } from "./applications/matchingProfiles"
@@ -16,7 +16,10 @@ import { generateWeights } from "./engine/weightEngine"
 import { findMatches } from "./engine/matchingEngine"
 
 
-const me = sampleProfiles[0]
+const me = ref({
+
+    ...sampleProfiles[0]
+})
 
 const currentPurpose = "study"
 
@@ -43,7 +46,7 @@ const finalWeights = computed(() =>
 const matches = computed(() =>
 
     findMatches(
-        me,
+        me.value,
         sampleProfiles,
         finalWeights.value,
         ACTIVE_FILTERS
@@ -51,7 +54,7 @@ const matches = computed(() =>
 
 )
 
-console.log(matches)
+console.log(matches.value)
 
 </script>
 
@@ -60,62 +63,60 @@ console.log(matches)
     <div>
 
         <h1>Affinia</h1>
-          <p> Purpose: {{ currentPurpose }} </p>
 
-          <h3> Your Priorities </h3>
+        <h2> Your Profile </h2>
 
-          <p> Location: {{ userWeights.location }} </p>
-          <input type="range" min="0" max="5" v-model="userWeights.location"/>
+        <p> Name </p>
+        <input v-model="me.name"/>
 
-          <p> Interests: {{ userWeights.interests }} </p>
-          <input type="range" min="0" max="5" v-model="userWeights.interests"/>
+        <p> Location </p>
+        <input v-model="me.location.area"/>
 
-          <p> Personality: {{ userWeights.personality }} </p>
-          <input type="range" min="0" max="5" v-model="userWeights.personality"/>
+        <p> Introversion: {{ me.personality.introversion }} </p>
+        <input type="range" min="0" max="10" v-model.number="me.personality.introversion"/>
 
-          <p> Goals: {{ userWeights.goals }} </p>
-          <input type="range" min="0" max="5" v-model="userWeights.goals"/>
+        <p> Conscientiousness: {{ me.personality.conscientiousness }} </p>
+        <input type="range" min="0" max="10" v-model.number="me.personality.conscientiousness"/>
+
+        <p> Openness: {{ me.personality.openness }} </p>
+        <input type="range" min="0" max="10" v-model.number="me.personality.openness"/>
+
+        <p> Purpose: {{ currentPurpose }} </p>
+
+        <h3> Your Priorities </h3>
+
+        <p> Location: {{ userWeights.location }} </p>
+        <input type="range" min="0" max="5" v-model.number="userWeights.location"/>
+
+        <p> Interests: {{ userWeights.interests }} </p>
+        <input type="range" min="0" max="5" v-model.number="userWeights.interests"/>
+
+        <p> Personality: {{ userWeights.personality }} </p>
+        <input type="range" min="0" max="5" v-model.number="userWeights.personality"/>
+
+        <p> Goals: {{ userWeights.goals }} </p>
+        <input type="range" min="0" max="5" v-model.number="userWeights.goals"/>
+        
+        <pre> {{ userWeights }} </pre>
+        <pre> {{ finalWeights }} </pre>
+
+        <h2> Matches for {{ me.name }} </h2>
+
+        <div v-for="match in matches" :key="match.profile.id">
+
+          <h3> {{ match.profile.name }} </h3>
+
+          <p> Compatibility: {{ match.compatibility }}% </p>
           
-          <pre>
-            {{ userWeights }}
-          </pre>
-          <pre>
-            {{ finalWeights }}
-          </pre>
+          <h4> Why? </h4>
+          
+          <ul>
+              <li v-for="reason in match.explanation" :key="reason">
+                {{ reason }}
+              </li>
+          </ul>
 
-        <h2>
-            Matches for {{ me.name }}
-        </h2>
-
-        <div
-            v-for="match in matches"
-            :key="match.profile.id"
-        >
-
-            <h3>
-                {{ match.profile.name }}
-            </h3>
-
-            <p>
-              Compatibility:
-              {{ match.compatibility }}%
-            </p>
-            <h4>
-              Why?
-            </h4>
-            
-            <ul>
-                <li
-                    v-for="reason in match.explanation"
-                    :key="reason"
-                >
-                    {{ reason }}
-                </li>
-            </ul>
-
-            <pre>
-              {{ match.breakdown }}
-            </pre>
+          <pre> {{ match.breakdown }} </pre>
 
         </div>
 
