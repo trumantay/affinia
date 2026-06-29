@@ -4,26 +4,41 @@ export const MATCHING_PROFILES = {
 
     study: {
 
-        location: 0.40,
+        location: 0.4,
         interests: 0.25,
-        personality: 0.20,
+        personality: 0.2,
         goals: 0.15
     },
 
-    friendship: {
+    friend: {
 
-        location: 0.25,
-        interests: 0.40,
-        personality: 0.25,
-        goals: 0.10
+        location: 0.3,
+        interests: 0.4,
+        personality: 0.2,
+        goals: 0.1
     },
 
-    founder: {
+    cofounder: {
 
-        location: 0.10,
-        interests: 0.20,
-        personality: 0.30,
-        goals: 0.40
+        location: 0.1,
+        interests: 0.2,
+        personality: 0.3,
+        goals: 0.4
+    },
+
+    dating: {
+
+        location: 0.3,
+        interests: 0.15,
+        personality: 0.45,
+        goals: 0.1
+    },
+
+    hobby: {
+
+        location: 0.2,
+        interests: 0.5,
+        personality: 0.2,
+        goals: 0.1
     }
-
 }

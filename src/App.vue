@@ -21,7 +21,7 @@ const me = ref({
     ...sampleProfiles[0]
 })
 
-const currentPurpose = "study"
+const currentPurpose = ref("study")
 
 const userWeights = reactive({
 
@@ -48,7 +48,7 @@ const userFilters = reactive({
 const finalWeights = computed(() =>
 
     generateWeights(
-        MATCHING_PROFILES[currentPurpose],
+        MATCHING_PROFILES[currentPurpose.value],
         userWeights
     )
 
@@ -92,7 +92,14 @@ console.log(matches.value)
         <p> Openness: {{ me.personality.openness }} </p>
         <input type="range" min="0" max="10" v-model.number="me.personality.openness"/>
 
-        <p> Purpose: {{ currentPurpose }} </p>
+        <h2> Purpose </h2>
+        <select v-model="currentPurpose">
+          <option value="study"> Study </option>
+          <option value="friend"> Friend </option>
+          <option value="cofounder"> Co-Founder </option>
+          <option value="dating"> Dating </option>
+          <option value="hobby"> Hobby </option>
+        </select>
 
         <h3> Your Priorities </h3>
 
