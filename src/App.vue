@@ -1,19 +1,20 @@
 <script setup>
 
-import { USER_WEIGHTS }
-from "./config/userWeights"
+/* CONFIGURATION */
+import { MATCHING_PROFILES } from "./applications/matchingProfiles"
 
-import { generateWeights }
-from "./engine/weightEngine"
+import { USER_WEIGHTS } from "./config/userWeights"
 
-import { sampleProfiles }
-from "./data/sampleProfiles"
+import { ACTIVE_FILTERS } from "./config/filters"
 
-import { MATCHING_PROFILES }
-from "./applications/matchingProfiles"
+/* DATA */
+import { sampleProfiles } from "./data/sampleProfiles"
 
-import { findMatches }
-from "./engine/matchingEngine"
+/* ENGINES */
+import { generateWeights } from "./engine/weightEngine"
+
+import { findMatches } from "./engine/matchingEngine"
+
 
 const me = sampleProfiles[0]
 
@@ -29,7 +30,8 @@ const matches =
     findMatches(
         me,
         sampleProfiles,
-        finalWeights
+        finalWeights,
+        ACTIVE_FILTERS
     )
 
 console.log(matches)
