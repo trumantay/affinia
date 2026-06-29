@@ -1,5 +1,11 @@
 <script setup>
 
+import { USER_WEIGHTS }
+from "./config/userWeights"
+
+import { generateWeights }
+from "./engine/weightEngine"
+
 import { sampleProfiles }
 from "./data/sampleProfiles"
 
@@ -13,11 +19,17 @@ const me = sampleProfiles[0]
 
 const currentPurpose = "study"
 
+const finalWeights =
+    generateWeights(
+        MATCHING_PROFILES[currentPurpose],
+        USER_WEIGHTS
+    )
+
 const matches =
     findMatches(
         me,
         sampleProfiles,
-        MATCHING_PROFILES[currentPurpose]
+        finalWeights
     )
 
 console.log(matches)
@@ -33,6 +45,9 @@ console.log(matches)
             Purpose:
             {{ currentPurpose }}
           </p>
+          <pre>
+            {{ finalWeights }}
+          </pre>
 
         <h2>
             Matches for {{ me.name }}
