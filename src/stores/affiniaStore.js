@@ -1,24 +1,24 @@
 import { defineStore } from "pinia"
 
+import { computed } from "vue"
+
 import { sampleProfiles } from "../data/sampleProfiles"
+
+import { generateWeights } from "../engine/weightEngine"
+
+import { findMatches } from "../engine/matchingEngine"
+
+import { MATCHING_PROFILES } from "../applications/matchingProfiles"
 
 export const useAffiniaStore =
 
-    defineStore(
-        "affinia",
-
-        {
+    defineStore("affinia", {
 
             state: () => ({
 
-                currentUser:
+                currentUser: structuredClone(sampleProfiles[0]),
 
-                    structuredClone(
-                        sampleProfiles[0]
-                    ),
-
-                currentPurpose:
-                    "study",
+                currentPurpose: "study",
 
                 userWeights: {
 
@@ -43,6 +43,22 @@ export const useAffiniaStore =
                 },
 
                 matches: []
-            })
+            }),
+            getters: {
+                matches(state) {
+                    const weights = generateWeights(MATCHING_PROFILES[state.currentPurpose], state.userWeights)
+
+                    return findMatches(
+
+                        state.currentUser,
+
+                        sampleProfiles,
+
+                        weights,
+
+                        state.filters
+                    )
+                }
+            }
         }
     )

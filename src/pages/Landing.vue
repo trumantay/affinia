@@ -14,6 +14,14 @@
 
         <router-link to="/preferences"> Preferences </router-link>
 
+        <br>
+
+        <router-link to="/filters"> Filters </router-link>
+        
+        <br>
+
+        <router-link to="/matches"> Matches </router-link>
+
     </div>
 
 </template>
