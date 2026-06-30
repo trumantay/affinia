@@ -16,6 +16,8 @@ export const useAffiniaStore =
 
             state: () => ({
 
+                firebaseUser: null,
+
                 currentUser: structuredClone(sampleProfiles[0]),
 
                 currentPurpose: "study",

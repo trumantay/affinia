@@ -1,32 +1,29 @@
-import {
-    createRouter,
-    createWebHistory
-}
-from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 
-import Landing
-from "../pages/Landing.vue"
+import Landing from "../pages/Landing.vue"
 
-import Profile
-from "../pages/Profile.vue"
+import Login from "../pages/Login.vue"
 
-import Purpose
-from "../pages/Purpose.vue"
+import Profile from "../pages/Profile.vue"
 
-import Preferences
-from "../pages/Preferences.vue"
+import Purpose from "../pages/Purpose.vue"
 
-import Filters
-from "../pages/Filters.vue"
+import Preferences from "../pages/Preferences.vue"
 
-import Matches
-from "../pages/Matches.vue"
+import Filters from "../pages/Filters.vue"
+
+import Matches from "../pages/Matches.vue"
 
 const routes = [
 
     {
         path: "/",
         component: Landing
+    },
+
+    {
+        path: "/login",
+        component: Login
     },
 
     {
