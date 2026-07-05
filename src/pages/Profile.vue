@@ -2,7 +2,29 @@
 
 import { useAffiniaStore } from "../stores/affiniaStore"
 
+import { saveProfile } from "../firebase/profileService"
+
 const store = useAffiniaStore()
+
+async function save() {
+
+    if (
+        !store.firebaseUser
+    ) {
+        return
+    }
+
+    await saveProfile(
+
+        store.firebaseUser.uid,
+
+        store.currentUser
+    )
+
+    alert(
+        "Saved!"
+    )
+}
 
 </script>
 
@@ -30,6 +52,8 @@ const store = useAffiniaStore()
         <p> Openness </p>
         <input type="range" min="0" max="10" v-model.number="store.currentUser.personality.openness" />
         <p> {{ store.currentUser.personality.openness }} </p>
+
+        <button @click="save" > Save Profile </button>
 
     </div>
 
