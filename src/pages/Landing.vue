@@ -2,6 +2,15 @@
 
 import { useAffiniaStore } from "../stores/affiniaStore"
 
+import { signOut } from "firebase/auth"
+
+import { auth } from "../firebase/auth"
+
+async function logout() {
+
+    await signOut(auth)
+}
+
 const store = useAffiniaStore()
 
 </script>
@@ -35,6 +44,10 @@ const store = useAffiniaStore()
         <br>
 
         <router-link to="/matches"> Matches </router-link>
+
+        <br><br>
+
+        <button @click="logout"> Logout </button>
 
     </div>
 

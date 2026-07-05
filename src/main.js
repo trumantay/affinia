@@ -15,6 +15,15 @@ app.use(router)
 
 const store = useAffiniaStore()
 
-listenToAuth(user => { store.firebaseUser = user })
+listenToAuth(async user => {
+
+    store.firebaseUser = user
+
+    await store.loadProfiles()
+
+    // console.log(store.allProfiles)
+
+    console.log(JSON.stringify(store.allProfiles, null, 2))
+})
 
 app.mount("#app")

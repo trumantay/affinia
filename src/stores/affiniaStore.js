@@ -10,6 +10,8 @@ import { findMatches } from "../engine/matchingEngine"
 
 import { MATCHING_PROFILES } from "../applications/matchingProfiles"
 
+import { loadProfiles as fetchProfiles } from "../firebase/matchingService"
+
 export const useAffiniaStore =
 
     defineStore("affinia", {
@@ -17,6 +19,8 @@ export const useAffiniaStore =
             state: () => ({
 
                 firebaseUser: null,
+
+                allProfiles: [],
 
                 currentUser: structuredClone(sampleProfiles[0]),
 
@@ -42,9 +46,7 @@ export const useAffiniaStore =
                     sharedGoals: true,
 
                     minimumCompatibility: 0
-                },
-
-                matches: []
+                }
             }),
             getters: {
                 matches(state) {
@@ -54,12 +56,20 @@ export const useAffiniaStore =
 
                         state.currentUser,
 
-                        sampleProfiles,
+                        state.allProfiles,
 
                         weights,
 
                         state.filters
                     )
+                }
+            },
+
+            actions: {
+
+                async loadProfiles() {
+
+                    this.allProfiles = await fetchProfiles()
                 }
             }
         }
