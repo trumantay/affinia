@@ -5,13 +5,31 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD0FpGBgamS851Z2i_iNOFeCcYLWS7VejA",
-  authDomain: "affinia-dev.firebaseapp.com",
-  projectId: "affinia-dev",
-  storageBucket: "affinia-dev.firebasestorage.app",
-  messagingSenderId: "213786369912",
-  appId: "1:213786369912:web:ae425ca6806375a2a0f28d"
-};
+
+    apiKey:
+        import.meta.env
+            .VITE_FIREBASE_API_KEY,
+
+    authDomain:
+        import.meta.env
+            .VITE_FIREBASE_AUTH_DOMAIN,
+
+    projectId:
+        import.meta.env
+            .VITE_FIREBASE_PROJECT_ID,
+
+    storageBucket:
+        import.meta.env
+            .VITE_FIREBASE_STORAGE_BUCKET,
+
+    messagingSenderId:
+        import.meta.env
+            .VITE_FIREBASE_MESSAGING_SENDER_ID,
+
+    appId:
+        import.meta.env
+            .VITE_FIREBASE_APP_ID
+}
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
