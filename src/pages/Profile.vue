@@ -64,6 +64,12 @@ async function save() {
 
         <input v-model="store.currentUser.name" />
 
+        <h2> Contact </h2>
+        <p> Telegram </p>
+        <input v-model="store.currentUser.telegram" placeholder="@username" />
+        <p> LinkedIn </p>
+        <input v-model="store.currentUser.linkedin" placeholder="https://linkedin.com/in/..." />
+
         <p> Location </p>
         <input v-model="store.currentUser.location.area" />
 
