@@ -6,6 +6,32 @@ import { saveProfile } from "../firebase/profileService"
 
 const store = useAffiniaStore()
 
+const availableInterests = [
+
+    "AI",
+
+    "Gaming",
+
+    "Startups",
+
+    "Finance",
+
+    "Fitness",
+
+    "Research"
+]
+
+const availableGoals = [
+
+    "academic_success",
+
+    "entrepreneurship",
+
+    "friendship",
+
+    "networking"
+]
+
 async function save() {
 
     if (
@@ -40,6 +66,16 @@ async function save() {
 
         <p> Location </p>
         <input v-model="store.currentUser.location.area" />
+
+        <h2> Interests </h2>
+        <div v-for="interest in availableInterests" :key="interest" >
+            <input type="checkbox" :value="interest" v-model="store.currentUser.interests" > {{ interest }}
+        </div>
+
+        <h2> Goals </h2>
+        <div v-for="goal in availableGoals" :key="goal" >
+            <input type="checkbox" :value="goal" v-model="store.currentUser.goals" > {{ goal }}
+        </div>
 
         <p> Introversion </p>
         <input type="range" min="0" max="10" v-model.number="store.currentUser.personality.introversion" />
