@@ -4,28 +4,18 @@ import { calculateCompatibility } from "./scoringEngine"
 
 import { explainMatch } from "./explainabilityEngine"
 
-export function rankProfiles(
-    targetProfile,
-    profiles,
-    weights,
-    filters
-) {
+export function rankProfiles(targetProfile, profiles, weights, filters) {
 
     const rankings = profiles
 
         .filter(
             profile =>
-                profile.id !== targetProfile.id
+                profile.firebaseId !== targetProfile.firebaseId
         )
 
         .map(profile => {
 
-            const result =
-                calculateCompatibility(
-                    targetProfile,
-                    profile,
-                    weights
-                )
+            const result = calculateCompatibility(targetProfile, profile, weights)
 
             return {
 
@@ -38,11 +28,7 @@ export function rankProfiles(
                     result.breakdown,
 
                 explanation:
-                    explainMatch(
-                        targetProfile,
-                        profile,
-                        result.breakdown
-                    )
+                    explainMatch(targetProfile, profile, result.breakdown)
             }
         })
 
@@ -54,10 +40,7 @@ export function rankProfiles(
         )
 
         .sort(
-            (a, b) =>
-                b.compatibility
-                -
-                a.compatibility
+            (a, b) => b.compatibility - a.compatibility
         )
 
     return rankings

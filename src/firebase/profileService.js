@@ -18,21 +18,16 @@ export async function saveProfile(userId, profile) {
 
 export async function loadProfile(userId) {
 
-    const snapshot =
-        await getDoc(
+    const snapshot = await getDoc(doc(db, "profiles", userId))
 
-            doc(
-                db,
-                "profiles",
-                userId
-            )
-        )
+    if (snapshot.exists()) {
 
-    if (
-        snapshot.exists()
-    ) {
+        return {
 
-        return snapshot.data()
+            firebaseId: snapshot.id,
+
+            ...snapshot.data()
+        }
     }
 
     return null
