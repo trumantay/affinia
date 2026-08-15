@@ -1,12 +1,12 @@
 <script setup>
 
 import { ref } from "vue"
-
+import { useRouter } from "vue-router"
 import { login, register } from "../firebase/authService"
 
 const email = ref("")
-
 const password = ref("")
+const router = useRouter()
 
 async function doRegister() {
 
@@ -34,7 +34,7 @@ async function doLogin() {
 
         console.log(result.user)
 
-        alert("Logged in!")
+        router.push("/")
 
     }
 
@@ -53,17 +53,15 @@ async function doLogin() {
         <h1> Login </h1>
 
         <p> Email </p>
-
         <input v-model="email" />
 
         <p> Password </p>
-
         <input type="password" v-model="password" />
 
         <br><br>
 
         <button @click="doRegister"> Register </button>
-
+        
         <button @click="doLogin"> Login </button>
 
     </div>

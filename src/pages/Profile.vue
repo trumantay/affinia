@@ -1,9 +1,12 @@
 <script setup>
 
+import { ref } from "vue"
+import { useRouter } from "vue-router"
 import { useAffiniaStore } from "../stores/affiniaStore"
-
 import { saveProfile } from "../firebase/profileService"
 
+const router = useRouter()
+const saveMessage = ref("")
 const store = useAffiniaStore()
 
 const availableInterests = [
@@ -32,24 +35,31 @@ const availableGoals = [
     "networking"
 ]
 
-async function save() {
+async function saveCurrentProfile() {
 
-    if (
-        !store.firebaseUser
-    ) {
+    if (!store.firebaseUser) {
         return
     }
 
-    await saveProfile(
+    await saveProfile(store.firebaseUser.uid, store.currentUser)
 
-        store.firebaseUser.uid,
+    saveMessage.value = "Profile saved successfully"
 
-        store.currentUser
-    )
+    setTimeout(() => {
 
-    alert(
-        "Saved!"
-    )
+        saveMessage.value = ""
+
+        router.push("/")
+
+    }, 1200)
+}
+
+function goBack() {
+    router.push("/")
+}
+
+function goNext() {
+    router.push("/matching")
 }
 
 </script>
@@ -95,10 +105,47 @@ async function save() {
         <input type="range" min="0" max="10" v-model.number="store.currentUser.personality.openness" />
         <p> {{ store.currentUser.personality.openness }} </p>
 
-        <button @click="save" > Save Profile </button>
+        <p v-if="saveMessage" class="save-message"> {{ saveMessage }} </p>
+        <div class="workflow-actions">
+
+            <button class="secondary" @click="goBack"> Previous </button>
+
+            <div class="right-actions">
+
+                <button class="secondary" @click="saveCurrentProfile"> Save Profile </button>
+
+                <button @click="goNext"> Next </button>
+
+            </div>
+
+        </div>
 
     </div>
 
     <pre> {{ store.currentUser }} </pre>
 
 </template>
+
+<style scoped>
+.save-message {
+    margin-top: 20px;
+    color: #047857;
+    font-weight: 600;
+}
+
+.workflow-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+}
+
+.right-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.secondary {
+    background: #6b7280;
+}
+</style>

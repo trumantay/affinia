@@ -6,7 +6,7 @@ import Login from "../pages/Login.vue"
 
 import Profile from "../pages/Profile.vue"
 
-import Purpose from "../pages/Purpose.vue"
+import MatchingSetup from "../pages/MatchingSetup.vue"
 
 import Preferences from "../pages/Preferences.vue"
 
@@ -32,8 +32,8 @@ const routes = [
     },
 
     {
-        path: "/purpose",
-        component: Purpose
+        path: "/matching",
+        component: MatchingSetup
     },
 
     {
