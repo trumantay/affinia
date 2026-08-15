@@ -39,9 +39,14 @@ function goNext() {
     </div>
 
     <div class="section">
-      <h2> Priority </h2>
+      <h2> Matching Preferences </h2>
       <p class="section-description">
-        Tell Affinia which factors should have the greatest influence when ranking potential matches.
+        Tell Affinia what matters most to you and which conditions are non-negotiable.
+      </p>
+
+      <h3 class="subheading"> Soft Preferences </h3>
+      <p class="section-description">
+        These sliders influence how Affinia ranks potential matches. Higher values make a factor more important, but they do not automatically exclude people.
       </p>
 
       <p> Location importance: {{ store.userWeights.location }} </p>
@@ -55,12 +60,10 @@ function goNext() {
 
       <p> Shared goals importance: {{ store.userWeights.goals }} </p>
       <input type="range" min="0" max="5" v-model.number="store.userWeights.goals" />
-    </div>
 
-    <div class="section">
-      <h2> Requirements </h2>
+      <h3 class="subheading"> Hard Filters </h3>
       <p class="section-description">
-        These are the conditions that candidates must satisfy before Affinia considers them as potential matches.
+        These conditions must be satisfied before someone is shown as a match.
       </p>
 
       <label><input type="checkbox" v-model="store.filters.sameLocation" /> Require same location </label>
@@ -72,6 +75,14 @@ function goNext() {
       <p> Minimum compatibility required: {{ store.filters.minimumCompatibility }}% </p>
 
       <input type="range" min="0" max="100" step="5" v-model.number="store.filters.minimumCompatibility" />
+
+      <div class="example-box">
+        Example:
+        <p>
+            If <strong> Location importance </strong> is high, nearby people will rank higher. <br>
+            If  <strong> Require same location </strong> is enabled, people outside your area will not be shown at all.
+        </p>
+      </div>
     </div>
 
     <div class="section info-card">
@@ -200,5 +211,26 @@ button {
     color: #6b7280;
     font-size: 14px;
     margin-top: 16px;
+}
+
+.subheading {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.example-box {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  border-left: 4px solid #2563eb;
+}
+
+.example-box p {
+  margin-top: 8px;
+  color: #374151;
+  line-height: 1.5;
 }
 </style>
